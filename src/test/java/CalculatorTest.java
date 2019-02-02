@@ -14,12 +14,16 @@
 //
 //******************************************************************************
 
-import org.junit.*;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.concurrent.TimeUnit;
 import java.net.URL;
 import io.appium.java_client.windows.WindowsDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class CalculatorTest {
 
@@ -43,7 +47,7 @@ public class CalculatorTest {
         }
     }
 
-    @Before
+    @BeforeTest
     public void Clear()
     {
         CalculatorSession.findElementByName("Clear").click();

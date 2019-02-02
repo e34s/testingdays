@@ -57,7 +57,7 @@ public class WinAppDriverTest {
         calculatorSession.findElementByName("Divide by").click();
         calculatorSession.findElementByName("Eight").click();
         calculatorSession.findElementByName("Equals").click();
-        org.junit.Assert.assertEquals("8", getCalculatorResultText());
+        Assert.assertEquals("8", getCalculatorResultText());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class WinAppDriverTest {
         calculatorSession.findElementByName("One").click();
         calculatorSession.findElementByName("One").click();
         calculatorSession.findElementByName("Equals").click();
-        org.junit.Assert.assertEquals("8", getCalculatorResultText());
+        Assert.assertEquals("8", getCalculatorResultText());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class WinAppDriverTest {
         calculatorSession.findElementByName("Multiply by").click();
         calculatorSession.findElementByName("Nine").click();
         calculatorSession.findElementByName("Equals").click();
-        org.junit.Assert.assertEquals("81", getCalculatorResultText());
+        Assert.assertEquals("81", getCalculatorResultText());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class WinAppDriverTest {
         calculatorSession.findElementByName("Minus").click();
         calculatorSession.findElementByName("One").click();
         calculatorSession.findElementByName("Equals").click();
-        org.junit.Assert.assertEquals("8", getCalculatorResultText());
+        Assert.assertEquals("8", getCalculatorResultText());
     }
 
 
