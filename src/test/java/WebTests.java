@@ -30,11 +30,13 @@ public class WebTests {
     }
 
     @Test
-    public void webtest() throws MalformedURLException {
-        driver.get("https://www.bmw.de/de/index.html");
-        driver.findElement(By.linkText("Alle BMW Modelle")).click();
-        wait.until((ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#ds2-model-page > div.row > div > h1"))));
-        Assert.assertEquals("Alle BMW Modelle: Übersicht | BMW.de", driver.getTitle());
+    public void webtest() throws MalformedURLException, InterruptedException {
+        driver.get("https://www.bmw.de/de/topics/mein-bmw.html");
+        driver.findElement(By.id("loginId")).sendKeys("me@myself.com");
+        Thread.sleep(2000);
+        driver.findElement(By.id("password")).sendKeys("pa$$w0rd");
+        Thread.sleep(2000);
+        Assert.assertEquals("https://www.bmw.de/de/topics/mein-bmw.html", driver.getCurrentUrl());
         driver.quit();
     }
 }

@@ -27,7 +27,7 @@ public class AppiumTest {
 
 
     @Test
-    public void mobileWebTest() throws MalformedURLException {
+    public void mobileWebTest() throws MalformedURLException, InterruptedException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(CapabilityType.PLATFORM_NAME, Platform.ANDROID);
         caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.0");
@@ -38,13 +38,19 @@ public class AppiumTest {
 
         RemoteWebDriver driver = new RemoteWebDriver(new URL("http://vm-106.element34.net/wd/hub"), caps);
 
-        driver.get("https://www.bmw.de/de/index.html");
+        driver.get("https://www.bmw.de/de/topics/mein-bmw.html");
+        driver.findElement(By.id("loginId")).sendKeys("me@myself.com");
+        Thread.sleep(2000);
+        driver.findElement(By.id("password")).sendKeys("pa$$w0rd");
+        Thread.sleep(2000);
+        Assert.assertEquals("https://www.bmw.de/de/topics/mein-bmw.html", driver.getCurrentUrl());
+
         driver.quit();
     }
 
 
 
-    @Test(invocationCount = 1, threadPoolSize = 10)
+    @Test(invocationCount = 3, threadPoolSize = 10)
     public void downloadApkFromUrlAndRunNativeTest() throws IOException, InterruptedException {
         String appLocation = "http://static.element34.net/mobile/demo_apks/ApiDemos-debug.apk";
         mobileNativeTest(appLocation);
@@ -55,7 +61,7 @@ public class AppiumTest {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(CapabilityType.PLATFORM_NAME, Platform.ANDROID);
         caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.1");
-        caps.setCapability("e34:token", "19705d15-03b8-4f");
+        caps.setCapability("e34:token", "5ae9ebb4-fa52-44");
 
         caps.setCapability("e34:app", appLocation);
         caps.setCapability("e34:video", true);
@@ -69,8 +75,8 @@ public class AppiumTest {
                 .ignoring(WebDriverException.class);
         try {
             // For demos, change cycles and sleep so the test takes longer and more containers can be seen in the live view.
-            int cycles = 1;
-            long sleep = 0;
+            int cycles = 3;
+            long sleep = 2000;
             for (int i = 0; i < cycles; i++) {
                 MobileElement accessibility = (MobileElement) wait.until(androidDriver -> driver.findElementByAccessibilityId("Accessibility"));
                 Thread.sleep(sleep);
